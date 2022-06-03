@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display");
+body, .message, .form, .form_  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+body {
+  height: 100%;
+  background-color: #000000;
+  font-family: "Source Sans Pro", sans-serif;
+  overflow: hidden;
+}
+
+/* .principal{
+  background-color: #000000;
+  height: 100vh;
+} */
+
+.container {
+  width: 700px;
+  height: 400px;
+  background: rgb(219, 211, 211);
+  position: relative;
+  display: grid;
+  grid-template: 100%/50% 50%;
+  box-shadow: 2px 2px 10px 0 rgba(51, 51, 51, 0.2);
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  margin-top: 100px;
+}
+
+.message {
+  position: absolute;
+  background: white;
+  width: 50%;
+  height: 100%;
+  transition: 0.5s all ease;
+  transform: translateX(100%);
+  z-index: 4;
+}
+.message:before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 70%;
+  background: #030303;
+  opacity: 0;
+  left: 0;
+  top: 15%;
+}
+.message .button {
+  margin: 5px 0;
+}
+
+.signup:before {
+  opacity: 0.3;
+  left: 0;
+}
+
+.login:before {
+  opacity: 0.3;
+  left: 100%;
+}
+
+.btn-wrapper {
+  width: 60%;
+}
+
+.form {
+  width: 100%;
+  height: 100%;
+}
+.form--heading {
+  font-size: 25px;
+  font-weight: bold;
+  height: 50px;
+  color: #2b2b2b;
+  font-family: "Playfair Display", serif;
+}
+
+.form_ {
+  width: 70%;
+}
+.form_ > * {
+  margin: 10px;
+}
+.form_ input {
+  width: 90%;
+  border: 0;
+  border-bottom: 1px solid rgba(195, 195, 216, 0.5);
+  font-size: 13px;
+  font-weight: 300;
+  color: #797A9E;
+  letter-spacing: 0.11em;
+}
+.form_  input::placeholder {
+  color: #C3C3D8;
+  font-size: 10px;
+}
+.form_  input:focus {
+  outline: 0;
+  border-bottom: 1px solid rgba(128, 155, 206, 0.7);
+  transition: 0.6s all ease;
+}
+
+.button {
+  width: 100%;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 300;
+  position: relative;
+  z-index: 3;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #3c3f44, #aaaaaa);
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+}
+
+@media (max-width: 750px) {
+  .container {
+    transform: scale(0.8);
+  }
+}

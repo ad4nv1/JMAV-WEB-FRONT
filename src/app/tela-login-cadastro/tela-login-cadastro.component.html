@@ -1,1 +1,44 @@
-<p>tela-login-cadastro works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/inicio">JMAV</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/inicio">Home</a>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
+
+  
+<div class="container">
+  <div class="message signup">
+    <div class="btn-wrapper">
+      <button class="button" id="signup">Cadastre-se</button>
+      <button class="button" id="login"> Login</button>
+    </div>
+  </div>
+  <div class="form form--signup">
+    <div class="form--heading">Seja bem vindo ao JMAV!</div>
+    <div class="form_" autocomplete="off">
+      <input type="text" placeholder="Name">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button class="button">Cadastrar</button>
+    </div>
+  </div>
+  <div class="form form--login">
+    <div class="form--heading">Seja bem vindo ao JMAV!</div>
+    <div class="form_" autocomplete="off">
+      <input [(ngModel)]='login.email' type="text" placeholder="Login">
+      <input [(ngModel)]='login.password' type="password" placeholder="Senha">
+      <button class="button" (click)="Logar()">Login</button>
+    </div>
+  </div>
+</div>
