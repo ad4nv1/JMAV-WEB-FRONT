@@ -89,7 +89,7 @@ body {
 .form_ > * {
   margin: 10px;
 }
-.form_ input {
+.form_ .inputParams {
   width: 90%;
   border: 0;
   border-bottom: 1px solid rgba(195, 195, 216, 0.5);
@@ -98,11 +98,11 @@ body {
   color: #797A9E;
   letter-spacing: 0.11em;
 }
-.form_  input::placeholder {
+.form_  .inputParams::placeholder {
   color: #C3C3D8;
   font-size: 10px;
 }
-.form_  input:focus {
+.form_  .inputParams:focus {
   outline: 0;
   border-bottom: 1px solid rgba(128, 155, 206, 0.7);
   transition: 0.6s all ease;

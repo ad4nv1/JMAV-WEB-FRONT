@@ -13,6 +13,8 @@ declare var jQuery: any;
 export class TelaLoginCadastroComponent implements OnInit {
 
   login: Logar = new Logar();
+  user: User = new User();
+  contaVendedor: string = "";
   constructor(
     private service: AuthService,
   ) { }
@@ -36,19 +38,43 @@ export class TelaLoginCadastroComponent implements OnInit {
         $(".message").addClass("login");
       });
     }) (jQuery);
-    
-    
   }
 
 
   Logar(){
-
     this.service.Logar(this.login).subscribe((resp: User)=>{
       alert("Usuario Logou");
+      sessionStorage.setItem('usuario', JSON.stringify(resp));
+      // (sessionStorage.getItem('usuario') == undefined)
     }, (err) =>{
-      alert("falhou mizeravelmente")
+      alert("falhou")
+    });
+  }
+  teste(){
+    this.service.requisicao().subscribe((resp:  any)=>{
+      console.log(resp)
     })
+  }
 
+  Cadastrar(){
+    if(this.contaVendedor){
+      this.service.CadastrarUser(this.user).subscribe((resp: User)=>{
+        alert("usuário cadastrado com sucesso");
+      },(err)=>{
+        alert("ocorreu algum erro, tente novamente mais tarde");
+      });
+    }else{
+      this.service.CadastrarSeller(this.user).subscribe((resp: User)=>{
+        alert("usuário cadastrado com sucesso");
+      },(err)=>{
+        alert("ocorreu algum erro, tente novamente mais tarde");
+      });
+    }
+  }
+
+  Vendedor(event: any){
+    !this.contaVendedor? this.contaVendedor = event.target.defaultValue:this.contaVendedor = "";
+    console.log(this.contaVendedor)
   }
 
 }

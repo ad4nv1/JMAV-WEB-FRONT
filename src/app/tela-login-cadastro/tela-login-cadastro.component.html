@@ -27,17 +27,23 @@
   <div class="form form--signup">
     <div class="form--heading">Seja bem vindo ao JMAV!</div>
     <div class="form_" autocomplete="off">
-      <input type="text" placeholder="Name">
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password">
-      <button class="button">Cadastrar</button>
+      <input class="inputParams" [(ngModel)]='user.name'  type="text" placeholder="Nome">
+      <input class="inputParams" [(ngModel)]='user.email'  type="email" placeholder="Email">
+      <input class="inputParams" [(ngModel)]='user.password'  type="password" placeholder="Senha">
+      <div class="form-check">
+        <input class="form-check-input" (change)="Vendedor($event)" type="checkbox" value="vendedor" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Conta de vendedor?
+        </label>
+      </div>
+      <button class="button" (click)="teste()">Cadastrar</button>
     </div>
   </div>
   <div class="form form--login">
     <div class="form--heading">Seja bem vindo ao JMAV!</div>
     <div class="form_" autocomplete="off">
-      <input [(ngModel)]='login.email' type="text" placeholder="Login">
-      <input [(ngModel)]='login.password' type="password" placeholder="Senha">
+      <input class="inputParams" [(ngModel)]='login.email' type="text" placeholder="Login">
+      <input class="inputParams" [(ngModel)]='login.password' type="password" placeholder="Senha">
       <button class="button" (click)="Logar()">Login</button>
     </div>
   </div>

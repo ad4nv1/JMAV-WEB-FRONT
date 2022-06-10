@@ -9,7 +9,7 @@ import { User } from '../Model/User';
 })
 export class AuthService {
 
-  private url = 'https://localhost:8080';
+  private url = 'http://localhost:8080';
 
   constructor(
     private http: HttpClient
@@ -19,8 +19,17 @@ export class AuthService {
     return this.http.post<User>(`${this.url}/user/logar`, params)
   }
 
-  Cadastrar(user: User): Observable<User>{
-    return this.http.post<User>(`${this.url}/user/logar`, user)
+  CadastrarUser(user: User): Observable<User>{
+    return this.http.post<User>(`${this.url}/user/cadastrar`, user)
+  }
+
+  CadastrarSeller(user: User): Observable<User>{
+    return this.http.post<User>(`${this.url}/seller/cadastrar`, user)
+  }
+
+
+  requisicao(){
+    return this.http.get("http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=08082650&sDsSenha=564321&sCepOrigem=70002900&sCepDestino=04547000&nVlPeso=1&nCdFormato=1&nVlComprimento=20&nVlAltura=20&nVlLargura=20&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=04510&nVlDiametro=0&StrRetorno=xml&nIndicaCalculo=3")
   }
 
   
