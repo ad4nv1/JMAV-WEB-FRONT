@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../Model/Product';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaInicialComponent implements OnInit {
 
-  constructor() { }
+  products: Product[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    private productService: AuthService,
+  ) { }
+
+  ngOnInit() {
+    this.GetAllProduct();
+  }
+
+  GetAllProduct(){
+    this.productService.GetAllProducts().subscribe((resp: Product[])=>{
+      this.products = resp;
+    });
   }
 
 }

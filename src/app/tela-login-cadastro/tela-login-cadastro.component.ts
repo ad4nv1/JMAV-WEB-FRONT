@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Logar } from '../Model/Logar';
 import { User } from '../Model/User';
 import { AuthService } from '../services/auth.service';
+import swal from 'sweetalert2';
+import { Seller } from '../Model/Seller';
 
 declare var jQuery: any;
 
@@ -13,14 +15,14 @@ declare var jQuery: any;
 export class TelaLoginCadastroComponent implements OnInit {
 
   login: Logar = new Logar();
-  user: User = new User();
+  //user: User = new User();
+  user: Seller = new Seller();
   contaVendedor: string = "";
   constructor(
     private service: AuthService,
   ) { }
 
   ngOnInit(): void {
-
     (function($){
       $("#signup").click(function() {
         $(".message").css("transform", "translateX(100%)");
@@ -50,9 +52,12 @@ export class TelaLoginCadastroComponent implements OnInit {
       alert("falhou")
     });
   }
+
   teste(){
-    this.service.requisicao().subscribe((resp:  any)=>{
-      console.log(resp)
+    swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: '',
     })
   }
 
