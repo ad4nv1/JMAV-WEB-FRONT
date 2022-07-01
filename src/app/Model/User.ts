@@ -1,9 +1,14 @@
+import { Product } from "./Product";
+
 export class User {
-    car :  string ;
-    developer :  string ;
-    email :  string ;
-    id : number;
-    name :  string ;
-    password :  string ;
-    status :  string;
+    balance: number;
+    carUsuario: string;
+    developerUsuario: string;
+    emailUsuario: string;
+    id: number;
+    nameUsuario: string;
+    passwordUsuario: string;
+    productsSeller: Product[];
+    statusUsuario: string;
+    vendedor: string
 }

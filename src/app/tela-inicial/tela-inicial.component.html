@@ -8,29 +8,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/inicio">Home</a>
+          <a class="nav-link active" aria-current="page" (click)="teste()" routerLink="/inicio">Home</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li> -->
+          <li *ngIf="logado" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Opções
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+              <li *ngIf="vendedor"><a class="dropdown-item cadastrarLink" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar produto</a></li>
+            </ul>
+          </li>
+        
+        
+       
       </ul>
+      
       <form class="d-flex">
-        <button class="btn btn-outline-success" routerLink="/LoginCadastro" type="submit">Login</button>
+        
+        <button  *ngIf="!logado" class="btn btn-outline-success" routerLink="/LoginCadastro" type="submit">Login</button>
+        <button *ngIf="logado" class="btn btn-outline-danger" (click)="Sair()" type="submit">Sair</button>
       </form>
+      
     </div>
   </div>
 </nav>
@@ -204,3 +203,57 @@
     </div>
 
   </footer>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cadastro de produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nome</label>
+            <input [(ngModel)]='produto.name' type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Preço</label>
+            <input [(ngModel)]='produto.price' type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Descrição</label>
+            <input [(ngModel)]='produto.description'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Imagem</label>
+            <input [(ngModel)]='produto.image'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Quantidade</label>
+            <input [(ngModel)]='produto.inventory'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Fornecedor</label>
+            <input [(ngModel)]='produto.provider'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Categoria</label>
+            <input [(ngModel)]='produto.category'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="CadastrarProduto()" class="btn btn-primary">Cadastrar produto</button>
+        </div>
+      </div>
+    </div>
+  </div>

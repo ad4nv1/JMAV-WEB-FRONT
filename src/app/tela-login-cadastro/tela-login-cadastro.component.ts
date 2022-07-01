@@ -3,7 +3,7 @@ import { Logar } from '../Model/Logar';
 import { User } from '../Model/User';
 import { AuthService } from '../services/auth.service';
 import swal from 'sweetalert2';
-import { Seller } from '../Model/Seller';
+import { Router } from '@angular/router';
 
 declare var jQuery: any;
 
@@ -15,11 +15,13 @@ declare var jQuery: any;
 export class TelaLoginCadastroComponent implements OnInit {
 
   login: Logar = new Logar();
-  //user: User = new User();
-  user: Seller = new Seller();
+  user: User = new User();
+  varVendedor: string = "";
+ 
   contaVendedor: string = "";
   constructor(
     private service: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,11 +47,20 @@ export class TelaLoginCadastroComponent implements OnInit {
 
   Logar(){
     this.service.Logar(this.login).subscribe((resp: User)=>{
-      alert("Usuario Logou");
       sessionStorage.setItem('usuario', JSON.stringify(resp));
+      this.router.navigate(["/inicio"])
+      swal.fire({
+        icon: 'success',
+        title: 'Bem vindo '+ resp.nameUsuario+"!",
+        text: '',
+      })
       // (sessionStorage.getItem('usuario') == undefined)
     }, (err) =>{
-      alert("falhou")
+      swal.fire({
+        icon: 'warning',
+        title: 'Eita!',
+        text: 'Email e senha inválidos!',
+      })
     });
   }
 
@@ -62,24 +73,30 @@ export class TelaLoginCadastroComponent implements OnInit {
   }
 
   Cadastrar(){
-    if(this.contaVendedor){
-      this.service.CadastrarUser(this.user).subscribe((resp: User)=>{
-        alert("usuário cadastrado com sucesso");
-      },(err)=>{
-        alert("ocorreu algum erro, tente novamente mais tarde");
-      });
-    }else{
-      this.service.CadastrarSeller(this.user).subscribe((resp: User)=>{
-        alert("usuário cadastrado com sucesso");
-      },(err)=>{
-        alert("ocorreu algum erro, tente novamente mais tarde");
-      });
-    }
+    this.user.balance = 0;
+    this.user.carUsuario = "";
+    this.user.developerUsuario = "Nao";
+    this.user.statusUsuario = "Ativo";
+    this.varVendedor == ""?this.user.vendedor = "Nao":this.user.vendedor  = "Sim";
+    console.log(this.user)
+    this.service.CadastrarUser(this.user).subscribe((resp: User)=>{
+      this.user = new User();
+      swal.fire({
+        icon: 'success',
+        title: 'Usuário cadastrado com sucesso!',
+        text: 'Você já pode logar na sua conta utilizando o email e senha!',
+      })
+    },(err)=>{
+      swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo deu errado, tente novamente mais tarde!',
+      })
+    })
   }
 
   Vendedor(event: any){
-    !this.contaVendedor? this.contaVendedor = event.target.defaultValue:this.contaVendedor = "";
-    console.log(this.contaVendedor)
+    !this.varVendedor? this.varVendedor = event.target.defaultValue: this.varVendedor = "";
   }
 
 }

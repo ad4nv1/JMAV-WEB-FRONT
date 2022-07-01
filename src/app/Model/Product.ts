@@ -1,14 +1,14 @@
-import { Seller } from "./Seller";
+import { User } from "./User";
 
 export class Product {
      category: string;
-     description : string;
-     id : 0;
-     image : string;
-     inventory: 0;
+     description: string;
+     id: number;
+     image: string;
+     inventory: number;
      name: string;
-     price: 0;
+     price: number;
      provider: string;
-     seller: Seller;
+     seller: User;
 }
 

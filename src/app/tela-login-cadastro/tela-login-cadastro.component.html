@@ -27,16 +27,16 @@
   <div class="form form--signup">
     <div class="form--heading">Seja bem vindo ao JMAV!</div>
     <div class="form_" autocomplete="off">
-      <input class="inputParams" [(ngModel)]='user.name'  type="text" placeholder="Nome">
-      <input class="inputParams" [(ngModel)]='user.email'  type="email" placeholder="Email">
-      <input class="inputParams" [(ngModel)]='user.password'  type="password" placeholder="Senha">
+      <input class="inputParams" [(ngModel)]='user.nameUsuario'  type="text" placeholder="Nome">
+      <input class="inputParams" [(ngModel)]='user.emailUsuario'  type="email" placeholder="Email">
+      <input class="inputParams" [(ngModel)]='user.passwordUsuario'  type="password" placeholder="Senha">
       <div class="form-check">
         <input class="form-check-input" (change)="Vendedor($event)" type="checkbox" value="vendedor" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
           Conta de vendedor?
         </label>
       </div>
-      <button class="button" (click)="teste()">Cadastrar</button>
+      <button class="button" (click)="Cadastrar()">Cadastrar</button>
     </div>
   </div>
   <div class="form form--login">
