@@ -93,7 +93,7 @@ export class TelaInicialComponent implements OnInit {
   SelecionarProduto(parametro: Product){
     this.nomeUsuarioInfo = ""
     this.produtoInfo = parametro;
-    this.produtoInfo.seller == null ?this.nomeUsuarioInfo = "Não informado":this.nomeUsuarioInfo = this.produtoInfo.seller.nameUsuario ;
+    this.produtoInfo.seller == null?this.nomeUsuarioInfo = "Não informado":this.nomeUsuarioInfo = this.produtoInfo.seller.nameUsuario ;
   }
 
   AtualizaUsuario(){

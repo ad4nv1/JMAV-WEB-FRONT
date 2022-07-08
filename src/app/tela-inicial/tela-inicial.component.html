@@ -17,7 +17,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item cadastrarLink" data-bs-toggle="modal"
-              data-bs-target="#modalEditarUsuario">Editar perfil</a></li>
+                data-bs-target="#modalEditarUsuario">Editar perfil</a></li>
             <li *ngIf="vendedor"><a class="dropdown-item cadastrarLink" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Cadastrar produto</a></li>
           </ul>
@@ -162,20 +162,20 @@
 
           <div class="mb-3">
             <label for="exampleInputEmailsdsd1" class="form-label">Nome</label>
-            <input [(ngModel)]='produto.name' maxlength="30" type="input" class="form-control" id="examplfghdegheInputEmail1"
-              aria-describedby="emailHelp">
+            <input [(ngModel)]='produto.name' maxlength="30" type="input" class="form-control"
+              id="examplfghdegheInputEmail1" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
             <label for="examdfgpleInputEmail144444" class="form-label">Preço</label>
-            <input [(ngModel)]='produto.price' maxlength="15" type="number" class="form-control" id="examdfgpleInputEmail1"
-              aria-describedby="emailHelp">
+            <input [(ngModel)]='produto.price' maxlength="15" type="number" class="form-control"
+              id="examdfgpleInputEmail1" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
             <label for="exampleInputEmaisdsdsdsdl1" class="form-label">Descrição</label>
-            <input [(ngModel)]='produto.description' maxlength="30" type="input" class="form-control" id="exampewsetleInputEmail1"
-              aria-describedby="emailHelp">
+            <input [(ngModel)]='produto.description' maxlength="30" type="input" class="form-control"
+              id="exampewsetleInputEmail1" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
@@ -186,20 +186,20 @@
 
           <div class="mb-3">
             <label for="exampleInputdfgdgEmail1" class="form-label">Quantidade</label>
-            <input [(ngModel)]='produto.inventory' maxlength="15" type="number" class="form-control" id="exampleInputdfsfEmail1"
-              aria-describedby="emailHelp">
+            <input [(ngModel)]='produto.inventory' maxlength="15" type="number" class="form-control"
+              id="exampleInputdfsfEmail1" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
             <label for="exampleInputEmaidfdfsdsl1" class="form-label">Fornecedor</label>
-            <input [(ngModel)]='produto.provider' maxlength="30" type="input" class="form-control" id="exa455655mpleInputEmail1"
-              aria-describedby="emailHelp">
+            <input [(ngModel)]='produto.provider' maxlength="30" type="input" class="form-control"
+              id="exa455655mpleInputEmail1" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
             <label for="exampleInputEmaidfdfdf1" class="form-label">Categoria</label>
-            <input [(ngModel)]='produto.category' maxlength="30" type="input" class="form-control" id="exampleIndfgdgfputEmail1"
-              aria-describedby="emailHelp">
+            <input [(ngModel)]='produto.category' maxlength="30" type="input" class="form-control"
+              id="exampleIndfgdgfputEmail1" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="modal-footer">
@@ -269,7 +269,7 @@
               <p class="pInfo">{{produtoInfo.inventory}}</p>
             </div>
           </div>
-          
+
           <div class="d-flex justify-content-center align-items-center">
             <div>
               <h4>Fornecedor</h4>
@@ -277,16 +277,6 @@
             <div>
               <p></p>
               <p class="pInfo">{{produtoInfo.provider}}</p>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center">
-            <div>
-              <h4>Vendedor:</h4>
-            </div>
-            <div>
-              <p></p>
-              <p class="pInfo">{{nomeUsuarioInfo}}</p>
             </div>
           </div>
 
@@ -308,40 +298,44 @@
           <div>
             <div class="mb-3">
               <label for="exampl56456eInputEmail1" class="form-label">Nome</label>
-              <input [(ngModel)]='usuario.nameUsuario' maxlength="25" type="email" class="form-control" id="exa454767mpleInputEmail1" aria-describedby="emailHelp">
+              <input [(ngModel)]='usuario.nameUsuario' maxlength="25" type="email" class="form-control"
+                id="exa454767mpleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1"  class="form-label">Email</label>
-              <input [(ngModel)]='usuario.emailUsuario' maxlength="30" type="email" class="form-control" id="exampleInp76864utEmail1" aria-describedby="emailHelp">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input [(ngModel)]='usuario.emailUsuario' maxlength="30" type="email" class="form-control"
+                id="exampleInp76864utEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1"  class="form-label">Senha Antiga</label>
-              <input [(ngModel)]='auxSenha' maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
+              <label for="exampleInputPassword1" class="form-label">Senha Antiga</label>
+              <input [(ngModel)]='auxSenha' maxlength="20" type="password" class="form-control"
+                id="exampleInputPassword1">
             </div>
             <div class="mb-3 form-check">
-              <input value="editar" (change)="EditarSenha($event)"  type="checkbox" class="form-check-input" >
+              <input value="editar" (change)="EditarSenha($event)" type="checkbox" class="form-check-input">
               <label class="form-check-label" for="exampleCheck1">Editar senha?</label>
             </div>
             <div *ngIf="exibirEditarSenha" class="mb-3">
-              <label for="exampleInputPassword1"  class="form-label">Senha</label>
-              <input [(ngModel)]='senha' [disabled]="this.auxSenha != this.usuario.passwordUsuario" maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
+              <label for="exampleInputPassword1" class="form-label">Senha</label>
+              <input [(ngModel)]='senha' [disabled]="this.auxSenha != this.usuario.passwordUsuario" maxlength="20"
+                type="password" class="form-control" id="exampleInputPassword1">
             </div>
-            
+
             <div *ngIf="exibirEditarSenha" class="mb-3">
-              <label for="exampleInputPassword1"  class="form-label">Conformar senha</label>
-              <input [(ngModel)]='confirmarSenha' [disabled]="this.auxSenha != this.usuario.passwordUsuario" maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
+              <label for="exampleInputPassword1" class="form-label">Conformar senha</label>
+              <input [(ngModel)]='confirmarSenha' [disabled]="this.auxSenha != this.usuario.passwordUsuario"
+                maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
             </div>
             <!-- <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div> -->
-            <button type="submit" [disabled]="senha != confirmarSenha || this.auxSenha != this.usuario.passwordUsuario" (click)="AtualizaUsuario()" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Atualizar</button>
+            <button type="submit" [disabled]="senha != confirmarSenha || this.auxSenha != this.usuario.passwordUsuario"
+              (click)="AtualizaUsuario()" class="btn btn-primary" data-bs-dismiss="modal"
+              aria-label="Close">Atualizar</button>
           </div>
 
         </div>
       </div>
     </div>
   </div>
-
-
-
