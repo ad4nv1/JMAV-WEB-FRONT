@@ -10,26 +10,29 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" (click)="teste()" routerLink="/inicio">Home</a>
         </li>
-          <li *ngIf="logado" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Opções
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Editar perfil</a></li>
-              <li *ngIf="vendedor"><a class="dropdown-item cadastrarLink" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar produto</a></li>
-            </ul>
-          </li>
-        
-        
-       
+        <li *ngIf="logado" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Opções
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item cadastrarLink" data-bs-toggle="modal"
+              data-bs-target="#modalEditarUsuario">Editar perfil</a></li>
+            <li *ngIf="vendedor"><a class="dropdown-item cadastrarLink" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Cadastrar produto</a></li>
+          </ul>
+        </li>
+
+
+
       </ul>
-      
+
       <form class="d-flex">
-        
-        <button  *ngIf="!logado" class="btn btn-outline-success" routerLink="/LoginCadastro" type="submit">Login</button>
+
+        <button *ngIf="!logado" class="btn btn-outline-success" routerLink="/LoginCadastro" type="submit">Login</button>
         <button *ngIf="logado" class="btn btn-outline-danger" (click)="Sair()" type="submit">Sair</button>
       </form>
-      
+
     </div>
   </div>
 </nav>
@@ -82,11 +85,10 @@
     </div>
 
 
-    <div class="container" >
+    <div class="container">
       <div class="card" *ngFor='let product of products'>
         <div class="card-header">
-          <img src="{{product.image}}"
-            alt="rover" />
+          <img src="{{product.image}}" alt="rover" />
         </div>
         <div class="card-body">
           <span class="tag tag-teal">{{product.category}}</span>
@@ -101,69 +103,11 @@
           </p>
           <div class="user">
             <button type="button" class="btn btn-primary">Comprar</button>
+            <button (click)="SelecionarProduto(product)" type="button" class="btn btn-secondary aaa"
+              data-bs-toggle="modal" data-bs-target="#modalInfo">info</button>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-      <!-- 
-
-        <div class="card">
-          <div class="card-header">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUJWDUUAnMxFEnUEP8Qy7Ih8EzWCRxQEFecg&usqp=CAU" alt="ballons" />
-          </div>
-          <div class="card-body">
-            <span class="tag tag-pink">Game</span>
-            <h4>
-              PS5, última geração.
-            </h4>
-            <h6>
-              Unidades: 50. Produto novo.
-            </h6>
-            <p>
-              Preço: 5000,00 R$ 
-            </p>
-            <div class="user">
-              <button type="button" class="btn btn-primary">Comprar</button>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-        
-        <div class="card">
-          <div class="card-header">
-            <img src="data:image/jpeg;base64,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" alt="city" />
-          </div>
-          <div class="card-body">
-            <span class="tag tag-pink">Game</span>
-            <h4>
-              Super Nintendo
-            </h4>
-            <h6>
-              Unidades: 50. Produto Usado (Ótimo estado de conservação).
-            </h6>
-            <p>
-              Preço: 400,00 R$
-            </p>
-            <div class="user">
-              <button type="button" class="btn btn-primary">Comprar</button>
-            </div>
-          </div>
-        </div> -->
 
     </div>
   </div>
@@ -217,38 +161,45 @@
         <div class="modal-body">
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nome</label>
-            <input [(ngModel)]='produto.name' type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputEmailsdsd1" class="form-label">Nome</label>
+            <input [(ngModel)]='produto.name' maxlength="30" type="input" class="form-control" id="examplfghdegheInputEmail1"
+              aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Preço</label>
-            <input [(ngModel)]='produto.price' type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="examdfgpleInputEmail144444" class="form-label">Preço</label>
+            <input [(ngModel)]='produto.price' maxlength="15" type="number" class="form-control" id="examdfgpleInputEmail1"
+              aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Descrição</label>
-            <input [(ngModel)]='produto.description'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputEmaisdsdsdsdl1" class="form-label">Descrição</label>
+            <input [(ngModel)]='produto.description' maxlength="30" type="input" class="form-control" id="exampewsetleInputEmail1"
+              aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Imagem</label>
-            <input [(ngModel)]='produto.image'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputEwetwetmail1" class="form-label">Imagem</label>
+            <input [(ngModel)]='produto.image' type="input" class="form-control" id="examplerhgbInputEmail1"
+              aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Quantidade</label>
-            <input [(ngModel)]='produto.inventory'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputdfgdgEmail1" class="form-label">Quantidade</label>
+            <input [(ngModel)]='produto.inventory' maxlength="15" type="number" class="form-control" id="exampleInputdfsfEmail1"
+              aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Fornecedor</label>
-            <input [(ngModel)]='produto.provider'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputEmaidfdfsdsl1" class="form-label">Fornecedor</label>
+            <input [(ngModel)]='produto.provider' maxlength="30" type="input" class="form-control" id="exa455655mpleInputEmail1"
+              aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Categoria</label>
-            <input [(ngModel)]='produto.category'  type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputEmaidfdfdf1" class="form-label">Categoria</label>
+            <input [(ngModel)]='produto.category' maxlength="30" type="input" class="form-control" id="exampleIndfgdgfputEmail1"
+              aria-describedby="emailHelp">
           </div>
         </div>
         <div class="modal-footer">
@@ -257,3 +208,140 @@
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="modalInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Informações de {{produtoInfo.name}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img class="imagemInfo " src="{{produtoInfo.image}}" alt="rover" />
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Categoria:</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{produtoInfo.category}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Nome:</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{produtoInfo.name}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Preço:</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{produtoInfo.price}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Descrição:</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{produtoInfo.description}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Quantidade:</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{produtoInfo.inventory}}</p>
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Fornecedor</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{produtoInfo.provider}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h4>Vendedor:</h4>
+            </div>
+            <div>
+              <p></p>
+              <p class="pInfo">{{nomeUsuarioInfo}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Olá </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="mb-3">
+              <label for="exampl56456eInputEmail1" class="form-label">Nome</label>
+              <input [(ngModel)]='usuario.nameUsuario' maxlength="25" type="email" class="form-control" id="exa454767mpleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1"  class="form-label">Email</label>
+              <input [(ngModel)]='usuario.emailUsuario' maxlength="30" type="email" class="form-control" id="exampleInp76864utEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1"  class="form-label">Senha Antiga</label>
+              <input [(ngModel)]='auxSenha' maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input value="editar" (change)="EditarSenha($event)"  type="checkbox" class="form-check-input" >
+              <label class="form-check-label" for="exampleCheck1">Editar senha?</label>
+            </div>
+            <div *ngIf="exibirEditarSenha" class="mb-3">
+              <label for="exampleInputPassword1"  class="form-label">Senha</label>
+              <input [(ngModel)]='senha' [disabled]="this.auxSenha != this.usuario.passwordUsuario" maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            
+            <div *ngIf="exibirEditarSenha" class="mb-3">
+              <label for="exampleInputPassword1"  class="form-label">Conformar senha</label>
+              <input [(ngModel)]='confirmarSenha' [disabled]="this.auxSenha != this.usuario.passwordUsuario" maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <!-- <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+            <button type="submit" [disabled]="senha != confirmarSenha || this.auxSenha != this.usuario.passwordUsuario" (click)="AtualizaUsuario()" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Atualizar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

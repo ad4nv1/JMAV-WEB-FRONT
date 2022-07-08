@@ -68,10 +68,10 @@ body {
   font-size: 13px;
   margin: 0 0 40px;
 }
-.user {
+/* .user {
   display: flex;
   margin-top: auto;
-}
+} */
 
 .user img {
   border-radius: 50%;
@@ -94,7 +94,7 @@ body {
     margin-top: 50px;
 }
 
-img{
+.user img{
     height: 600px;
 }
 
@@ -281,4 +281,19 @@ footer{
 
 .cadastrarLink{
   cursor: pointer;
+}
+
+.aaa{
+  margin-left: 30px;
+
+}
+
+.imagemInfo{
+  width: 400px;
+  height: 400px;
+  margin-top: 0;
+}
+
+.pInfo{
+  margin-left: 30px;
 }

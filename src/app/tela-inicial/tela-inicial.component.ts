@@ -16,6 +16,14 @@ export class TelaInicialComponent implements OnInit {
   logado: boolean = false;
   vendedor: boolean = false;
   produto: Product = new Product();
+  produtoInfo: Product = new Product();
+  nomeUsuarioInfo: string = "";
+  usuario: User = new User();
+  auxSenha: string = "";
+  senha: string ="";
+  confirmarSenha: string = "";
+  editSenha: number = 0;
+  exibirEditarSenha: boolean = false;
 
   constructor(
     private service: AuthService,
@@ -33,6 +41,7 @@ export class TelaInicialComponent implements OnInit {
       sessionStorage.getItem('usuario')? this.logado = true: this.logado =false;
     this.verificaUsuario = JSON.parse(sessionStorage.getItem('usuario') as string);
     this.verificaUsuario.vendedor == "Sim"? this.vendedor = true: this.vendedor = false;
+    this.usuario = this.verificaUsuario;
     }
     
   }
@@ -50,6 +59,11 @@ export class TelaInicialComponent implements OnInit {
   Sair(){
     sessionStorage.clear();
     this.logado = false
+  }
+
+  VerificaSenhas(){
+    if(this.exibirEditarSenha && this.senha != "" && this.confirmarSenha != "")this.usuario.passwordUsuario = this.confirmarSenha;
+    else this.usuario.passwordUsuario = this.usuario.passwordUsuario;
   }
 
 
@@ -74,6 +88,40 @@ export class TelaInicialComponent implements OnInit {
         text: 'Algo deu errado, tente novamente mais tarde!',
       })
     })
+  }
+
+  SelecionarProduto(parametro: Product){
+    this.nomeUsuarioInfo = ""
+    this.produtoInfo = parametro;
+    this.produtoInfo.seller == null ?this.nomeUsuarioInfo = "Não informado":this.nomeUsuarioInfo = this.produtoInfo.seller.nameUsuario ;
+  }
+
+  AtualizaUsuario(){
+    this.VerificaSenhas();
+    this.service.AtualizarUsuario(this.usuario).subscribe((resp: User)=>{
+      sessionStorage.setItem('usuario', JSON.stringify(resp));
+      swal.fire({
+        icon: 'success',
+        title: 'Usuário atualizado com sucesso!',
+        text: 'Os dados do usuário foram atualizados!',
+      })
+    },(err)=>{
+      swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo deu errado, tente novamente mais tarde!',
+      })
+    })
+  }
+
+  EditarSenha(event: any){
+    if(this.editSenha == 0){
+      this.editSenha = 1;
+      this.exibirEditarSenha = true;
+    }else{
+      this.editSenha = 0;
+      this.exibirEditarSenha = false;
+    }
   }
 
 }

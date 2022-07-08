@@ -41,5 +41,9 @@ export class AuthService {
     return this.http.post(`${this.url}/product/cadastrar`, param, this.token);
   }
 
+  AtualizarUsuario(user: User): Observable<User>{
+    return this.http.put<User>(`${this.url}/user/atualizar`, user)
+  }
+
   
 }

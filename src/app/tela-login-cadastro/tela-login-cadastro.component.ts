@@ -73,7 +73,14 @@ export class TelaLoginCadastroComponent implements OnInit {
   }
 
   Cadastrar(){
-    this.user.balance = 0;
+    if(this.user.nameUsuario.length > 25 || this.user.emailUsuario.length > 30 || this.user.passwordUsuario.length > 20){
+      swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Muitos caracteres nos campos!',
+      })
+    }else{
+      this.user.balance = 0;
     this.user.carUsuario = "";
     this.user.developerUsuario = "Nao";
     this.user.statusUsuario = "Ativo";
@@ -93,6 +100,8 @@ export class TelaLoginCadastroComponent implements OnInit {
         text: 'Algo deu errado, tente novamente mais tarde!',
       })
     })
+    }
+    
   }
 
   Vendedor(event: any){

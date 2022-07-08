@@ -27,9 +27,9 @@
   <div class="form form--signup">
     <div class="form--heading">Seja bem vindo ao JMAV!</div>
     <div class="form_" autocomplete="off">
-      <input class="inputParams" [(ngModel)]='user.nameUsuario'  type="text" placeholder="Nome">
-      <input class="inputParams" [(ngModel)]='user.emailUsuario'  type="email" placeholder="Email">
-      <input class="inputParams" [(ngModel)]='user.passwordUsuario'  type="password" placeholder="Senha">
+      <input class="inputParams" [(ngModel)]='user.nameUsuario' maxlength="25"  type="text" placeholder="Nome">
+      <input class="inputParams" [(ngModel)]='user.emailUsuario' maxlength="30"  type="email" placeholder="Email">
+      <input class="inputParams" [(ngModel)]='user.passwordUsuario' maxlength="20" type="password" placeholder="Senha">
       <div class="form-check">
         <input class="form-check-input" (change)="Vendedor($event)" type="checkbox" value="vendedor" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
