@@ -73,34 +73,61 @@ export class TelaLoginCadastroComponent implements OnInit {
   }
 
   Cadastrar(){
-    if(this.user.nameUsuario.length > 25 || this.user.emailUsuario.length > 30 || this.user.passwordUsuario.length > 20){
+    if(this.user.nameUsuario == undefined ||  this.user.emailUsuario == undefined || this.user.passwordUsuario == undefined){
       swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Muitos caracteres nos campos!',
+        text: 'Preencha todos os campos!',
       })
     }else{
-      this.user.balance = 0;
-    this.user.carUsuario = "";
-    this.user.developerUsuario = "Nao";
-    this.user.statusUsuario = "Ativo";
-    this.varVendedor == ""?this.user.vendedor = "Nao":this.user.vendedor  = "Sim";
-    console.log(this.user)
-    this.service.CadastrarUser(this.user).subscribe((resp: User)=>{
-      this.user = new User();
-      swal.fire({
-        icon: 'success',
-        title: 'Usuário cadastrado com sucesso!',
-        text: 'Você já pode logar na sua conta utilizando o email e senha!',
+
+   
+    if ((this.user.emailUsuario.length >=1) &&
+    (this.user.emailUsuario.length >=3) &&
+    (this.user.emailUsuario.search("@")!=-1) &&
+    (this.user.emailUsuario.search(" ")==-1) &&
+    (this.user.emailUsuario.search(" ")==-1) &&
+    (this.user.emailUsuario.search(".")!=-1) &&
+    (this.user.emailUsuario.indexOf(".") >=1)&&
+    (this.user.emailUsuario.lastIndexOf(".") < this.user.emailUsuario.length - 1)) 
+    {
+      if(this.user.nameUsuario.length > 25 || this.user.emailUsuario.length > 50 || this.user.passwordUsuario.length > 20){
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Muitos caracteres nos campos!',
+        })
+      }else{
+        this.user.balance = 0;
+      this.user.carUsuario = "";
+      this.user.developerUsuario = "Nao";
+      this.user.statusUsuario = "Ativo";
+      this.varVendedor == ""?this.user.vendedor = "Nao":this.user.vendedor  = "Sim";
+      console.log(this.user)
+      this.service.CadastrarUser(this.user).subscribe((resp: User)=>{
+        this.user = new User();
+        swal.fire({
+          icon: 'success',
+          title: 'Usuário cadastrado com sucesso!',
+          text: 'Você já pode logar na sua conta utilizando o email e senha!',
+        })
+      },(err)=>{
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo deu errado, tente novamente mais tarde!',
+        })
       })
-    },(err)=>{
+      }
+    }else{
       swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Algo deu errado, tente novamente mais tarde!',
+        text: 'Email inválido!',
       })
-    })
     }
+  }
+    
     
   }
 

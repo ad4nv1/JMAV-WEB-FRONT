@@ -5,10 +5,13 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
+    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" (click)="teste()" routerLink="/inicio">Home</a>
+          
         </li>
         <li *ngIf="logado" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -28,7 +31,9 @@
       </ul>
 
       <form class="d-flex">
-
+        <!-- <button class="btn btn-outline-success" type="button" (click)="CalcularFrete()">
+          pagamento teste
+        </button> -->
         <button *ngIf="!logado" class="btn btn-outline-success" routerLink="/LoginCadastro" type="submit">Login</button>
         <button *ngIf="logado" class="btn btn-outline-danger" (click)="Sair()" type="submit">Sair</button>
       </form>
@@ -78,15 +83,22 @@
 </div>
 <div class="col-md-12">
   <div class="col-md-11 colmd10 flex-column">
-    <div>
-      <p class="TiTuloProdutos">
-        Produtos disponíveis:
-      </p>
+    <div class="divPesquisa">
+      <div>
+        <p class="TiTuloProdutos">
+          Produtos disponíveis:
+        </p>
+      </div>
+      <div>
+        <input placeholder="Pesquise por nome" type="input" class="form-control" id='quantidadeCredenciamento'
+          [formControl]="queryField" />
+      </div>
+
     </div>
 
 
     <div class="container">
-      <div class="card" *ngFor='let product of products'>
+      <div class="card" *ngFor='let product of productsFiltrado'>
         <div class="card-header">
           <img src="{{product.image}}" alt="rover" />
         </div>
@@ -102,7 +114,7 @@
             Preço: {{product.price}} R$
           </p>
           <div class="user">
-            <button type="button" class="btn btn-primary">Comprar</button>
+            <button type="button" class="btn btn-primary" (click)="Pagamento(product)">Comprar</button>
             <button (click)="SelecionarProduto(product)" type="button" class="btn btn-secondary aaa"
               data-bs-toggle="modal" data-bs-target="#modalInfo">info</button>
           </div>
@@ -168,7 +180,7 @@
 
           <div class="mb-3">
             <label for="examdfgpleInputEmail144444" class="form-label">Preço</label>
-            <input [(ngModel)]='produto.price' maxlength="15" type="number" class="form-control"
+            <input [(ngModel)]='produto.price' mask="separator.0" maxlength="6" thousandSeparator="." type="text" class="form-control"
               id="examdfgpleInputEmail1" aria-describedby="emailHelp">
           </div>
 
@@ -180,13 +192,13 @@
 
           <div class="mb-3">
             <label for="exampleInputEwetwetmail1" class="form-label">Imagem</label>
-            <input [(ngModel)]='produto.image' type="input" class="form-control" id="examplerhgbInputEmail1"
+            <input [(ngModel)]='produto.image' maxlength="100" type="input" class="form-control" id="examplerhgbInputEmail1"
               aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
             <label for="exampleInputdfgdgEmail1" class="form-label">Quantidade</label>
-            <input [(ngModel)]='produto.inventory' maxlength="15" type="number" class="form-control"
+            <input [(ngModel)]='produto.inventory' mask="0000" type="text"  class="form-control"
               id="exampleInputdfsfEmail1" aria-describedby="emailHelp">
           </div>
 
@@ -322,7 +334,7 @@
             </div>
 
             <div *ngIf="exibirEditarSenha" class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Conformar senha</label>
+              <label for="exampleInputPassword1" class="form-label">Confirmar senha</label>
               <input [(ngModel)]='confirmarSenha' [disabled]="this.auxSenha != this.usuario.passwordUsuario"
                 maxlength="20" type="password" class="form-control" id="exampleInputPassword1">
             </div>
