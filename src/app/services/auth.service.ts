@@ -12,7 +12,6 @@ import { User } from '../Model/User';
 })
 export class AuthService {
 
-  // private url = 'http://localhost:8080';
   private url = 'https://jmav-back.herokuapp.com';
 
   token= {
@@ -59,8 +58,10 @@ export class AuthService {
   }
 
   Frete(parametro: string):Observable<any>{
-    return this.http.post<any>(`${this.url}/requisicao/consultarCEP`, "53441310")
+    return this.http.post<any>(`${this.url}/requisicao/consultarCEP`, parametro)
   }
 
-  
+  EditarProduto(parametro: Product): Observable<Product>{
+    return this.http.put<Product>(`${this.url}/product/atualizar`, parametro, this.token);
+  }
 }

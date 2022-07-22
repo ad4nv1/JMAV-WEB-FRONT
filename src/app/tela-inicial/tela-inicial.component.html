@@ -99,6 +99,11 @@
 
     <div class="container">
       <div class="card" *ngFor='let product of productsFiltrado'>
+        <div class="botoesTopo user">
+          <button (click)="SelecionarProdutoAtualizar(product)" type="button" class="btn btn-primary"
+                data-bs-toggle="modal" data-bs-target="#atualizarProduto">Atualizar produto</button>
+          <button (click)="CalcularFrete()" type="button" class="btn btn-link">Calcular frete</button>
+        </div>
         <div class="card-header">
           <img src="{{product.image}}" alt="rover" />
         </div>
@@ -114,9 +119,10 @@
             Preço: {{product.price}} R$
           </p>
           <div class="user">
-            <button type="button" class="btn btn-primary" (click)="Pagamento(product)">Comprar</button>
+            <button type="button" class="btn btn-success" (click)="Pagamento(product)">Comprar</button>
             <button (click)="SelecionarProduto(product)" type="button" class="btn btn-secondary aaa"
               data-bs-toggle="modal" data-bs-target="#modalInfo">info</button>
+            
           </div>
         </div>
       </div>
@@ -192,7 +198,7 @@
 
           <div class="mb-3">
             <label for="exampleInputEwetwetmail1" class="form-label">Imagem</label>
-            <input [(ngModel)]='produto.image' maxlength="100" type="input" class="form-control" id="examplerhgbInputEmail1"
+            <input [(ngModel)]='produto.image' type="input" class="form-control" id="examplerhgbInputEmail1"
               aria-describedby="emailHelp">
           </div>
 
@@ -220,6 +226,67 @@
       </div>
     </div>
   </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="atualizarProduto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Atualizar Produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="exampleInputEmailsdsd1" class="form-label">Nome</label>
+            <input [(ngModel)]='atualizarProduto.name' maxlength="30" type="input" class="form-control"
+              id="examplfghdegheInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="examdfgpleInputEmail144444" class="form-label">Preço</label>
+            <input [(ngModel)]='atualizarProduto.price' mask="separator.0" maxlength="6" thousandSeparator="." type="text" class="form-control"
+              id="examdfgpleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmaisdsdsdsdl1" class="form-label">Descrição</label>
+            <input [(ngModel)]='atualizarProduto.description' maxlength="30" type="input" class="form-control"
+              id="exampewsetleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEwetwetmail1" class="form-label">Imagem</label>
+            <input [(ngModel)]='atualizarProduto.image' type="input" class="form-control" id="examplerhgbInputEmail1"
+              aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputdfgdgEmail1" class="form-label">Quantidade</label>
+            <input [(ngModel)]='atualizarProduto.inventory' mask="0000" type="text"  class="form-control"
+              id="exampleInputdfsfEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmaidfdfsdsl1" class="form-label">Fornecedor</label>
+            <input [(ngModel)]='atualizarProduto.provider' maxlength="30" type="input" class="form-control"
+              id="exa455655mpleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmaidfdfdf1" class="form-label">Categoria</label>
+            <input [(ngModel)]='atualizarProduto.category' maxlength="30" type="input" class="form-control"
+              id="exampleIndfgdgfputEmail1" aria-describedby="emailHelp">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="AtualizarProduto()" data-bs-dismiss="modal" aria-label="Close" class="btn btn-primary">Atualizar produto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
   <div class="modal fade" id="modalInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

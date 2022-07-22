@@ -31,7 +31,8 @@ export class TelaInicialComponent implements OnInit {
   queryField = new FormControl();
   nomeProduto: string = "";
   productsFiltrado: Product[] = [];
-  preco: any 
+  preco: any;
+  atualizarProduto: Product = new Product();
 
   constructor(
     private service: AuthService,
@@ -172,7 +173,7 @@ export class TelaInicialComponent implements OnInit {
     req.category_id = parametro.category;
     req.title = parametro.name;
     req.description = parametro.description;
-    req.picture_url = parametro.image;
+    req.picture_url = "https://avatars.githubusercontent.com/u/71855790?v=4";
     req.currency_id = "BRL";
     req.quantity = 1;
     let pag: Pagamento = new Pagamento();
@@ -185,26 +186,71 @@ export class TelaInicialComponent implements OnInit {
     })
   }
 
-//   CalcularFrete() {
-//     this.service.Frete("53441310").subscribe((resp: any) => {
-//       console.log(resp)
-//     }, (err) => {
-//       if (err.statusText === "OK") {
-//         console.log(err.error.text)
-//         let parseString = require('xml2js').parseString;
-// let xml = "<root>Hello xml2js!</root>"
+  SelecionarProdutoAtualizar(produto: Product){
+    this.atualizarProduto = produto;
+  }
 
-// parseString(xml, function (err:any, result:any) {
-//   console.dir(result);
-// });
-//         // let parseString = require('xml2js').parseString;
-//         // let xml = "<root>Hello xml2js!</root>"
+  AtualizarProduto(){
+    this.service.EditarProduto(this.atualizarProduto).subscribe((resp: Product)=>{
+      swal.fire({
+        icon: 'success',
+        title: 'Produto atualizado com sucesso!',
+        text: 'Os dados do produto foram atualizados!',
+      })
+    }, (err)=>{
+      swal.fire({
+        icon: 'warning',
+        title:'Algo deu errado',
+        text: 'Tente novamente mais tarde!',
+      })
+    })
+  }
 
-//         // parseString(xml, ((error: any, result: any)=>{
-//         //   console.dir(result);
-//         // }) )
-//       }
-//     })
-//   }
+
+
+  async CalcularFrete() {
+    const { value: text } = await swal.fire({
+      input: 'text',
+      inputLabel: 'Insira seu CPF',
+      inputPlaceholder: '00000-000',
+      inputAttributes: {
+        'aria-label': 'Type your message here'
+      },
+      showCancelButton: true
+    })
+    
+    if (text) {
+      this.service.Frete(text).subscribe((resp: string)=>{
+        let a = resp.indexOf("<Valor>") //7
+        let b = resp.indexOf("<\Valor>") //7
+        swal.fire("O valor do frete é: "+resp.slice(a+7, b));
+      },(err)=>{
+        console.log(err.error.text)
+        if(err.statusText.toUpperCase === "OK".toUpperCase){
+        let a = err.error.text.indexOf("<Valor>") //7
+        let b = err.error.text.indexOf("</Valor>") //7
+        swal.fire("O valor do frete é: "+err.error.text.slice(a+7, b));
+        }else{
+          console.log(err.statusText)
+        swal.fire("Cep informado não é válido");
+        }
+        
+      })
+
+     
+    }
+  }
+
+  async MensagemValor(msg:string): Promise<string>{
+    this.service.Frete(msg).subscribe((resp: String)=>{
+      let a = resp.indexOf("<Valor>") //7
+      let b = resp.indexOf("<\Valor>") //7
+      msg = resp.slice(a+7, b)
+      msg =  "O valor do frete é: "+msg;
+    },(err)=>{
+      msg = "O valor do frete é: "+msg;
+    })
+    return msg
+  }
 
 }
